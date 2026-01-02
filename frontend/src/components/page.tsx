@@ -1,36 +1,13 @@
-import { useState, useMemo, useEffect } from "react"
-import { EventsOn } from "../../wailsjs/runtime";
-import { GetClips } from '../../wailsjs/go/main/App'
+import { useState, useMemo } from "react"
 import { Search } from "lucide-react"
 import ClipCard from "./ui/clip-card"
-import type { Clip } from "types/clip";
+import { useClips } from "../context/ClipContext"
 
 // Sample data from the provided JSON
 
 function PageContent() {
     const [searchQuery, setSearchQuery] = useState("")
-    const [clips, setClips] = useState<{ pinned: Clip[]; recent: Clip[] }>({ pinned: [], recent: [] });
-
-    const getClips = async () => {
-        const data = await GetClips();
-
-        // wanted to use a hash map but i said fuck it lmao
-        const pinned = data.filter(clip => clip.isPinned);
-        const recent = data.filter(clip => !clip.isPinned);
-
-        setClips({ pinned, recent });
-    }
-
-    useEffect(() => {
-        getClips();
-    }, []);
-
-    EventsOn("clipboard:changed", (text: string) => {
-        console.log("New clip:", text);
-
-        // get fresh clips data
-        getClips();
-    });
+    const { clips } = useClips()
 
     const filteredClips = useMemo(() => {
         const query = searchQuery.toLowerCase()
@@ -52,12 +29,11 @@ function PageContent() {
                     clip.content.toLowerCase().includes(query),
             ),
         }
-    }, [searchQuery])
+    }, [searchQuery, clips])
 
     return (
         <main className="min-h-screen bg-background p-6 md:p-10">
             <div className="margin"></div>
-
             <div className="mx-auto max-w-6xl">
                 {/* Header */}
                 <div className="mb-10 flex items-center justify-between">
@@ -117,8 +93,12 @@ function PageContent() {
     )
 }
 
+import { ClipProvider } from "../context/ClipContext"
+
 export default function Page() {
     return (
-        <PageContent />
+        <ClipProvider>
+            <PageContent />
+        </ClipProvider>
     )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { Copy, Trash2 } from "lucide-react"
+import { Copy, Pin } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import type { Clip } from '../../../types/clip'
 
@@ -40,9 +40,9 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
         }
     }
 
-    const handleDelete = () => {
-        // TODO: Implement delete functionality
-        console.log("Delete clip:", clip.id)
+    const handlePin = () => {
+        // TODO: Implement pin functionality
+        console.log("Pin clip:", clip.id)
     }
 
     const formatTime = (dateString: string) => {
@@ -81,7 +81,7 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
             {/* Footer with time and actions */}
             <div className="flex items-center justify-between">
                 <span className="hidden text-xs text-muted-foreground md:block">{formatTime(clip.createdAt)}</span>
-                <div className="flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+                <div className="flex gap-2  transition-opacity group-hover:opacity-100">
                     <button
                         onClick={handleCopy}
                         className={`rounded p-1.5 transition-colors ${copied ? "bg-green-100 text-green-700" : "bg-foreground/5 text-foreground hover:bg-foreground/10"
@@ -91,11 +91,11 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
                         <Copy className="h-4 w-4" />
                     </button>
                     <button
-                        onClick={handleDelete}
-                        className="rounded bg-foreground/5 p-1.5 text-foreground transition-colors hover:bg-red-100 hover:text-red-700"
-                        title="Delete clip"
+                        onClick={handlePin}
+                        className="rounded bg-foreground/5 p-1.5 text-foreground transition-colors hover:bg-yellow-100 hover:text-yellow-700"
+                        title="Pin clip"
                     >
-                        <Trash2 className="h-4 w-4" />
+                        <Pin className="h-4 w-4" />
                     </button>
                 </div>
             </div>
