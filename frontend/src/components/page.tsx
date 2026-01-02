@@ -1,4 +1,4 @@
-import { useState, useMemo, Suspense, useEffect } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { EventsOn } from "../../wailsjs/runtime";
 import { GetClips } from '../../wailsjs/go/main/App'
 import { Search } from "lucide-react"
@@ -119,8 +119,6 @@ function PageContent() {
 
 export default function Page() {
     return (
-        <Suspense>
-            <PageContent />
-        </Suspense>
+        <PageContent />
     )
 }
