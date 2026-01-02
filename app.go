@@ -5,8 +5,13 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"github.com/atotto/clipboard"
+
+	"Clipussy/internal/clipboard"
+
+	clip "github.com/atotto/clipboard"
+	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
+
 // to read clipboard contents, use cli command <<< go get github.com/atotto/clipboard >>>
 
 // App struct
@@ -30,7 +35,7 @@ func (a *App) startup(ctx context.Context) {
 	}
 
 	dbPath := filepath.Join(appDir, "gyatt.db")
-    
+
 	err = InitDB(dbPath)
 	if err != nil {
 		panic(err)
@@ -39,7 +44,7 @@ func (a *App) startup(ctx context.Context) {
 	createTables()
 
 	clipboard.StartClipboardListener(func() {
-		text, err := clipboard.ReadAll()
+		text, err := clip.ReadAll()
 		if err != nil || text == "" {
 			return
 		}
