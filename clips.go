@@ -77,6 +77,7 @@ func addClip(content string, clipType string) error {
 
 // this pins/unpins a clip by toggling its pinned status
 func togglePinClip(clipID int) error {
+	fmt.Printf("Toggling pin status for clip ID: %d\n", clipID)
 	query := `UPDATE clips SET pinned = NOT pinned WHERE id = ?`
 	result, err := DB.Exec(query, clipID)
 	if err != nil {

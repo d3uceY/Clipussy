@@ -3,6 +3,8 @@
 import { Copy, Pin } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import type { Clip } from '../../../types/clip'
+import { TogglePin } from "../../../wailsjs/go/main/App"
+import { useClips } from "@/context/ClipContext"
 
 
 interface ClipCardProps {
@@ -13,6 +15,7 @@ interface ClipCardProps {
 export default function ClipCard({ clip, type }: ClipCardProps) {
     const [copied, setCopied] = useState(false)
     const cardRef = useRef<HTMLDivElement>(null)
+    const { getClips } = useClips()
 
     useEffect(() => {
         const updateRowSpan = () => {
@@ -40,9 +43,14 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
         }
     }
 
-    const handlePin = () => {
-        // TODO: Implement pin functionality
-        console.log("Pin clip:", clip.id)
+    const handlePin = async () => {
+        const clipId = Number(clip.id.replace('clip_', ''))
+        console.log("Toggling pin for clip ID:", clipId)
+        await TogglePin(clipId).catch((err) => {
+            console.error("Failed to toggle pin:", err)
+        }).finally(() => {
+            getClips()
+        })
     }
 
     const formatTime = (dateString: string) => {
@@ -65,10 +73,11 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
     return (
         <div
             ref={cardRef}
-            className={"hand-drawn lined thin p-3 bg-[#F9F5E6] relative"}
+            className={"hand-drawn lined thin p-3 bg-[#F9F5E6] relative group"}
         >   {/* Header with icon and timestamp */}
             {type == "pinned" && <img src={"pin.png"} alt="pin-img" className="h-10 -top-5 right-0 absolute" />}
             <div className="mb-3 flex items-start justify-between">
+                {JSON.stringify(clip.isPinned)}
                 <span className="text-xl"></span>
                 <span className="text-xs text-muted-foreground md:hidden">{formatTime(clip.createdAt)}</span>
             </div>
@@ -81,7 +90,7 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
             {/* Footer with time and actions */}
             <div className="flex items-center justify-between">
                 <span className="hidden text-xs text-muted-foreground md:block">{formatTime(clip.createdAt)}</span>
-                <div className="flex gap-2  transition-opacity group-hover:opacity-100">
+                <div className="flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
                     <button
                         onClick={handleCopy}
                         className={`rounded p-1.5 transition-colors ${copied ? "bg-green-100 text-green-700" : "bg-foreground/5 text-foreground hover:bg-foreground/10"
@@ -92,10 +101,14 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
                     </button>
                     <button
                         onClick={handlePin}
-                        className="rounded bg-foreground/5 p-1.5 text-foreground transition-colors hover:bg-yellow-100 hover:text-yellow-700"
-                        title="Pin clip"
+                        className={`rounded p-1.5 transition-colors ${
+                            clip.isPinned 
+                                ? "bg-yellow-100 text-yellow-700 hover:bg-red-100 hover:text-red-700" 
+                                : "bg-foreground/5 text-foreground hover:bg-yellow-100 hover:text-yellow-700"
+                        }`}
+                        title={clip.isPinned ? "Unpin clip" : "Pin clip"}
                     >
-                        <Pin className="h-4 w-4" />
+                        <Pin className={`h-4 w-4 ${clip.isPinned ? "fill-current" : ""}`} />
                     </button>
                 </div>
             </div>
