@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 )
+// to read clipboard contents, use cli command <<< go get github.com/atotto/clipboard >>>
 
 // App struct
 type App struct {
