@@ -49,6 +49,14 @@ func (a *App) startup(ctx context.Context) {
 			return
 		}
 
+		// Save to database
+		err = addClip(text, "text")
+		if err != nil {
+			fmt.Printf("Failed to save clip to database: %v\n", err)
+			return
+		}
+
+		// Notify frontend
 		runtime.EventsEmit(a.ctx, "clipboard:changed", text)
 	})
 }
@@ -56,6 +64,16 @@ func (a *App) startup(ctx context.Context) {
 // Greet returns a greeting for the given name
 func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
+}
+
+// GetClips returns all clips from the database
+func (a *App) GetClips() ([]Clip, error) {
+	return getClips()
+}
+
+// TogglePin toggles the pinned status of a clip
+func (a *App) TogglePin(clipID int) error {
+	return togglePinClip(clipID)
 }
 
 // get app data directory
