@@ -77,7 +77,6 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
         >   {/* Header with icon and timestamp */}
             {type == "pinned" && <img src={"pin.png"} alt="pin-img" className="h-10 -top-5 right-0 absolute" />}
             <div className="mb-3 flex items-start justify-between">
-                {JSON.stringify(clip.isPinned)}
                 <span className="text-xl"></span>
                 <span className="text-xs text-muted-foreground md:hidden">{formatTime(clip.createdAt)}</span>
             </div>
