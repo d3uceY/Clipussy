@@ -1,125 +1,53 @@
-"use client"
-
-import { useState, useMemo, Suspense } from "react"
+import { useState, useMemo, Suspense, useEffect } from "react"
+import { EventsOn } from "../../wailsjs/runtime";
+import { GetClips } from '../../wailsjs/go/main/App'
 import { Search } from "lucide-react"
 import ClipCard from "./ui/clip-card"
+import type { Clip } from "types/clip";
 
 // Sample data from the provided JSON
-const initialData = {
-    meta: {
-        total: 94,
-        limit: 100,
-        pinnedCount: 6,
-    },
-    pinned: [
-        {
-            id: "clip_001",
-            content: 'git commit -m "initial commit"',
-            length: 32,
-            isPinned: true,
-            createdAt: "2026-01-01T09:12:44.221Z",
-        },
-        {
-            id: "clip_002",
-            content: "rm -rf node_modules && npm install",
-            length: 35,
-            isPinned: true,
-            createdAt: "2026-01-01T11:30:02.003Z",
-        },
-        {
-            id: "clip_003",
-            content: "npm install @tanstack/react-table",
-            length: 36,
-            isPinned: true,
-            createdAt: "2026-01-02T13:42:11.402Z",
-        },
-        {
-            id: "clip_004",
-            content: "SELECT * FROM users WHERE active = 1;",
-            length: 39,
-            isPinned: true,
-            createdAt: "2026-01-02T13:41:01.998Z",
-        },
-        {
-            id: "clip_005",
-            content: "https://docs.tauri.app/start/",
-            length: 34,
-            isPinned: true,
-            createdAt: "2026-01-02T13:38:44.771Z",
-        },
-        {
-            id: "clip_006",
-            content: '{ "name": "clipussy", "private": true }',
-            length: 39,
-            isPinned: true,
-            createdAt: "2026-01-02T13:35:09.114Z",
-        },
-    ],
-    recent: [
-        {
-            id: "clip_9f3a2c",
-            content: "npm install @tanstack/react-table",
-            length: 36,
-            isPinned: false,
-            createdAt: "2026-01-02T13:42:11.402Z",
-        },
-        {
-            id: "clip_9f3a2d",
-            content: " Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem magnam, dolorem ad sapiente sed quidem blanditiis ullam alias facilis, repudiandae unde vero expedita corporis cupiditate. Ab tempora impedit tempore rem.",
-            length: 39,
-            isPinned: false,
-            createdAt: "2026-01-02T13:41:01.998Z",
-        },
-        {
-            id: "clip_9f3a2e",
-            content: "https://docs.tauri.app/start/",
-            length: 34,
-            isPinned: false,
-            createdAt: "2026-01-02T13:38:44.771Z",
-        },
-        {
-            id: "clip_9f3a2f",
-            content: '{ "name": "clipussy", "private": true }',
-            length: 39,
-            isPinned: false,
-            createdAt: "2026-01-02T13:35:09.114Z",
-        },
-        {
-            id: "clip_9f3a30",
-            content: "POV: you copied this knowing Clipussy got you 🐾",
-            length: 49,
-            isPinned: false,
-            createdAt: "2026-01-02T13:31:55.003Z",
-        },
-        {
-            id: "clip_9f3a31",
-            content: 'const handleClick = () => { console.log("clicked") }',
-            length: 52,
-            isPinned: false,
-            createdAt: "2026-01-02T13:29:15.008Z",
-        },
-    ],
-}
 
 function PageContent() {
     const [searchQuery, setSearchQuery] = useState("")
+    const [clips, setClips] = useState<{ pinned: Clip[]; recent: Clip[] }>({ pinned: [], recent: [] });
+
+    const getClips = async () => {
+        const data = await GetClips();
+
+        // wanted to use a hash map but i said fuck it lmao
+        const pinned = data.filter(clip => clip.isPinned);
+        const recent = data.filter(clip => !clip.isPinned);
+
+        setClips({ pinned, recent });
+    }
+
+    useEffect(() => {
+        getClips();
+    }, []);
+
+    EventsOn("clipboard:changed", (text: string) => {
+        console.log("New clip:", text);
+
+        // get fresh clips data
+        getClips();
+    });
 
     const filteredClips = useMemo(() => {
         const query = searchQuery.toLowerCase()
 
         if (!query) {
             return {
-                pinned: initialData.pinned,
-                recent: initialData.recent,
+                pinned: clips.pinned,
+                recent: clips.recent,
             }
         }
 
         return {
-            pinned: initialData.pinned.filter(
+            pinned: clips.pinned.filter(
                 (clip) =>
                     clip.content.toLowerCase().includes(query),
             ),
-            recent: initialData.recent.filter(
+            recent: clips.recent.filter(
                 (clip) =>
                     clip.content.toLowerCase().includes(query),
             ),

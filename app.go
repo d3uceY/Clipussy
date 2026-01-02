@@ -43,6 +43,7 @@ func (a *App) startup(ctx context.Context) {
 
 	createTables()
 
+	// start clipboard listener
 	clipboard.StartClipboardListener(func() {
 		text, err := clip.ReadAll()
 		if err != nil || text == "" {
