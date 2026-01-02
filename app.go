@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"github.com/atotto/clipboard"
 )
 // to read clipboard contents, use cli command <<< go get github.com/atotto/clipboard >>>
 
@@ -36,6 +37,15 @@ func (a *App) startup(ctx context.Context) {
 	}
 
 	createTables()
+
+	clipboard.StartClipboardListener(func() {
+		text, err := clipboard.ReadAll()
+		if err != nil || text == "" {
+			return
+		}
+
+		runtime.EventsEmit(a.ctx, "clipboard:changed", text)
+	})
 }
 
 // Greet returns a greeting for the given name
