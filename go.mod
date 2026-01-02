@@ -2,7 +2,10 @@ module Clipussy
 
 go 1.24.0
 
-require github.com/wailsapp/wails/v2 v2.11.0
+require (
+	github.com/wailsapp/wails/v2 v2.11.0
+	modernc.org/sqlite v1.42.2
+)
 
 require (
 	github.com/bep/debounce v1.2.1 // indirect
@@ -39,7 +42,6 @@ require (
 	modernc.org/libc v1.66.10 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
-	modernc.org/sqlite v1.42.2 // indirect
 )
 
 // replace github.com/wailsapp/wails/v2 v2.11.0 => C:\Users\deuce\go\pkg\mod

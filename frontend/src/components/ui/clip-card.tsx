@@ -4,6 +4,7 @@ import { Copy, Trash2 } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import type { Clip } from '../../../types/clip'
 
+
 interface ClipCardProps {
     clip: Clip
     type: "pinned" | "recent"
@@ -64,8 +65,9 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
     return (
         <div
             ref={cardRef}
-            className={"hand-drawn lined thin p-3 bg-[#F9F5E6]"}
-        >            {/* Header with icon and timestamp */}
+            className={"hand-drawn lined thin p-3 bg-[#F9F5E6] relative"}
+        >   {/* Header with icon and timestamp */}
+            {type == "pinned" && <img src={"pin.png"} alt="pin-img" className="h-10 -top-5 right-0 absolute" />}
             <div className="mb-3 flex items-start justify-between">
                 <span className="text-xl"></span>
                 <span className="text-xs text-muted-foreground md:hidden">{formatTime(clip.createdAt)}</span>

@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-    <div className="page">
+    <div className="page min-h-screen">
       <Page />
     </div>
     </>
