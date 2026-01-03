@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef, useEffect } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Search } from "lucide-react"
 import ClipCard from "./ui/clip-card"
 import { useClips } from "../context/ClipContext"
@@ -10,7 +10,7 @@ function PageContent() {
     const { clips } = useClips()
     const searchInputRef = useRef<HTMLInputElement>(null)
 
-    const filteredClips = useMemo(() => {
+    const filteredClips = () => {
         const query = searchQuery.toLowerCase()
 
         if (!query) {
@@ -30,7 +30,7 @@ function PageContent() {
                     clip.content.toLowerCase().includes(query),
             ),
         }
-    }, [searchQuery, clips])
+    }
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -67,14 +67,14 @@ function PageContent() {
                 </div>
 
                 {/* Pinned Section */}
-                {filteredClips.pinned.length > 0 && (
+                {filteredClips().pinned.length > 0 && (
                     <section className="mb-12">
                         <h2 className="mb-6 flex items-center gap-2 text-2xl font-bold text-foreground">
                             <span className="text-2xl">📌</span>
                             <span className="italic">Pinned</span>
                         </h2>
                         <div className="free-form-grid-container">
-                            {filteredClips.pinned.map((clip) => (
+                            {   filteredClips().pinned.map((clip) => (
                                 <ClipCard key={clip.id} clip={clip} type="pinned" />
                             ))}
                         </div>
@@ -82,14 +82,14 @@ function PageContent() {
                 )}
 
                 {/* Recent Section */}
-                {filteredClips.recent.length > 0 && (
+                {filteredClips().recent.length > 0 && (
                     <section>
                         <h2 className="mb-6 flex items-center gap-2 text-2xl font-bold text-foreground">
                             <span className="text-2xl">📝</span>
                             <span className="italic">Recent</span>
                         </h2>
                         <div className="free-form-grid-container">
-                            {filteredClips.recent.map((clip) => (
+                            {filteredClips().recent.map((clip) => (
                                 <ClipCard key={clip.id} clip={clip} type="recent" />
                             ))}
                         </div>
@@ -97,7 +97,7 @@ function PageContent() {
                 )}
 
                 {/* Empty State */}
-                {filteredClips.pinned.length === 0 && filteredClips.recent.length === 0 && (
+                {filteredClips().pinned.length === 0 && filteredClips().recent.length === 0 && (
                     <div className="flex h-64 items-center justify-center text-center">
                         <p className="text-lg text-muted-foreground">
                             {searchQuery ? "No clips found matching your search" : "No clips yet. Start copying!"}
