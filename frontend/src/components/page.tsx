@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react"
+import { useState, useMemo, useRef, useEffect } from "react"
 import { Search } from "lucide-react"
 import ClipCard from "./ui/clip-card"
 import { useClips } from "../context/ClipContext"
@@ -8,6 +8,7 @@ import { useClips } from "../context/ClipContext"
 function PageContent() {
     const [searchQuery, setSearchQuery] = useState("")
     const { clips } = useClips()
+    const searchInputRef = useRef<HTMLInputElement>(null)
 
     const filteredClips = useMemo(() => {
         const query = searchQuery.toLowerCase()
@@ -31,6 +32,18 @@ function PageContent() {
         }
     }, [searchQuery, clips])
 
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.ctrlKey && e.key === 'f') {
+                e.preventDefault()
+                searchInputRef.current?.focus()
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [])
+
     return (
         <main className="min-h-screen bg-background p-6 md:p-10">
             <div className="margin"></div>
@@ -40,13 +53,14 @@ function PageContent() {
                     <h1 className="font-serif text-4xl font-bold italic text-foreground md:text-5xl">Clipussy</h1>
                     <div className="relative w-full max-w-md torn-input">
                         <input
+                            ref={searchInputRef}
                             type="text"
                             placeholder="Search (Ctrl+F)"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full px-4 py-2 text-foreground placeholder-gray-500 focus:outline-none"
                         />
-                        <Search className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-accent" />
+                        <Search className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#c0bdbd]" />
                     </div>
                 </div>
 
