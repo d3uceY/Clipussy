@@ -8,12 +8,15 @@ interface ClipContextType {
     clips: { pinned: Clip[]; recent: Clip[] }
     setClips: React.Dispatch<React.SetStateAction<{ pinned: Clip[]; recent: Clip[] }>>
     getClips: () => Promise<void>
+    soundOn: boolean
+    setSoundOn: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ClipContext = createContext<ClipContextType | undefined>(undefined)
 
 export function ClipProvider({ children }: { children: ReactNode }) {
     const [clips, setClips] = useState<{ pinned: Clip[]; recent: Clip[] }>({ pinned: [], recent: [] })
+    const [soundOn, setSoundOn] = useState<boolean>(true)
 
     const getClips = async () => {
         return GetClips().then((data) => {
@@ -35,7 +38,7 @@ export function ClipProvider({ children }: { children: ReactNode }) {
     }, [])
 
     return (
-        <ClipContext.Provider value={{ clips, setClips, getClips }}>
+        <ClipContext.Provider value={{ clips, setClips, getClips, soundOn, setSoundOn }}>
             {children}
         </ClipContext.Provider>
     )
