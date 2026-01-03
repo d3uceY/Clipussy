@@ -38,13 +38,13 @@ function PageContent() {
                 {/* Header */}
                 <div className="mb-10 flex items-center justify-between">
                     <h1 className="font-serif text-4xl font-bold italic text-foreground md:text-5xl">Clipussy</h1>
-                    <div className="relative w-full max-w-md">
+                    <div className="relative w-full max-w-md torn-input">
                         <input
                             type="text"
                             placeholder="Search (Ctrl+F)"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full rounded-lg bg-white px-4 py-2 text-foreground shadow-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent"
+                            className="w-full px-4 py-2 text-foreground placeholder-gray-500 focus:outline-none"
                         />
                         <Search className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-accent" />
                     </div>
