@@ -80,7 +80,7 @@ function PageContent() {
                         <h1 className="font-serif text-4xl font-bold italic text-foreground md:text-5xl">Clipussy</h1>
                         <Dialog>
                             <DialogTrigger asChild>
-                                <button className="text-2xl hover:opacity-70 transition-opacity cursor-pointer" title="About">
+                                <button  className="heartbeat text-2xl hover:opacity-70 transition-opacity cursor-pointer font-bold" title="About">
                                     ⓘ
                                 </button>
                             </DialogTrigger>
