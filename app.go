@@ -63,7 +63,9 @@ func (a *App) startup(ctx context.Context) {
 		}
 
 		// Notify frontend
-		runtime.EventsEmit(a.ctx, "clipboard:changed", text)
+		if a.ctx != nil {
+			runtime.EventsEmit(a.ctx, "clipboard:changed", text)
+		}
 	})
 }
 
@@ -99,5 +101,3 @@ func getAppDataDir() (string, error) {
 
 	return appDir, err
 }
-
-

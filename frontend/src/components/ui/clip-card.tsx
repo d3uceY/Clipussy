@@ -74,8 +74,9 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
         // }
         await Delete(clipId).catch((err) => {
             console.error("Failed to delete clip:", err)
+        }).then(() => {
+            getClips()
         })
-        await getClips()
     }
 
     return (
