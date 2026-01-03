@@ -67,8 +67,6 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
         playSound("/sounds/paper-rip.mp3", soundOn, .1)
 
 
-        // TODO: omo, there is a bug here where if you delete the last clip in pinned or recent, it doesnt update the UI properly
-        // If this is the last clip, so i clear that shit to avoid stale data
         if (clips.pinned.length <= 1 && clips.recent.length <= 1) {
             setClips({ pinned: [], recent: [] })
         }
