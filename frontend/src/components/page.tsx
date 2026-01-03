@@ -5,6 +5,14 @@ import { useClips } from "../context/ClipContext"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { playSound } from "@/helpers/playSound";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 
 // Sample data from the provided JSON
 
@@ -68,7 +76,41 @@ function PageContent() {
             <div className="mx-auto max-w-6xl">
                 {/* Header */}
                 <div className="mb-10 flex items-center gap-8 justify-between">
-                    <h1 className="font-serif text-4xl font-bold italic text-foreground md:text-5xl">Clipussy</h1>
+                    <div className="flex items-center gap-2">
+                        <h1 className="font-serif text-4xl font-bold italic text-foreground md:text-5xl">Clipussy</h1>
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <button className="text-2xl hover:opacity-70 transition-opacity cursor-pointer" title="About">
+                                    ⓘ
+                                </button>
+                            </DialogTrigger>
+                            <DialogContent className="bg-[#F9F5E6]">
+                                <DialogHeader>
+                                    <DialogTitle className="text-2xl font-serif italic">About Clipussy</DialogTitle>
+                                    <DialogDescription className="text-base pt-4 space-y-3">
+                                        <p>
+                                            <strong>Clipussy</strong> is a creative clipboard manager that helps you keep track of your copied content with style.
+                                        </p>
+                                        <p>
+                                            Created with 💜 by <strong>Onyekwelu Jesse</strong> (
+                                            <a 
+                                                href="https://github.com/d3uceY" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="text-blue-600 hover:underline"
+                                            >
+                                                @d3uceY
+                                            </a>
+                                            )
+                                        </p>
+                                        <p className="text-sm text-muted-foreground pt-2">
+                                            Built with Wails, React, TypeScript, and Go
+                                        </p>
+                                    </DialogDescription>
+                                </DialogHeader>
+                            </DialogContent>
+                        </Dialog>
+                    </div>
                     <div className="relative w-full max-w-md torn-input">
                         <div className="tape-1 absolute -top-3 left-0 h-12 w-4 bg-yellow-200/40 rotate-45 rounded-sm shadow-sm"></div>
                         <div className="tape-2 absolute -top-3 right-0 h-12 w-4 bg-yellow-200/40 -rotate-45 rounded-sm shadow-sm"></div>
