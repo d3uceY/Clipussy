@@ -60,7 +60,7 @@ function PageContent() {
                             placeholder="Search (Ctrl+F)"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full px-4 py-2 text-foreground placeholder-gray-500 focus:outline-none"
+                            className="w-full px-4 pt-2 text-foreground placeholder-gray-500 focus:outline-none"
                         />
                         <Search className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#c0bdbd]" />
                     </div>
