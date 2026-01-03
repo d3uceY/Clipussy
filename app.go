@@ -77,6 +77,11 @@ func (a *App) TogglePin(clipID int) error {
 	return togglePinClip(clipID)
 }
 
+// Delete a clip by ID
+func (a *App) Delete(clipID int) error {
+	return deleteClip(clipID)
+}
+
 // get app data directory
 func getAppDataDir() (string, error) {
 	dir, err := os.UserConfigDir()
@@ -89,3 +94,5 @@ func getAppDataDir() (string, error) {
 
 	return appDir, err
 }
+
+

@@ -1,9 +1,7 @@
-"use client"
-
-import { Copy, Pin } from "lucide-react"
+import { Copy, Pin, Trash2 } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import type { Clip } from '../../../types/clip'
-import { TogglePin } from "../../../wailsjs/go/main/App"
+import { TogglePin, Delete } from "../../../wailsjs/go/main/App"
 import { useClips } from "@/context/ClipContext"
 import { playSound } from "@/helpers/playSound"
 import { formatTime } from "@/helpers/formatTime"
@@ -62,7 +60,15 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
         })
     }
 
-    
+    const handleDelete = async () => {
+        const clipId = Number(clip.id.replace('clip_', ''))
+        
+        await Delete(clipId).catch((err) => {
+            console.error("Failed to delete clip:", err)
+        }).finally(() => {
+            getClips()
+        })
+    }
 
     return (
         <div
@@ -101,6 +107,13 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
                         title={clip.isPinned ? "Unpin clip" : "Pin clip"}
                     >
                         <Pin className={`h-4 w-4 ${clip.isPinned ? "fill-current" : ""}`} />
+                    </button>
+                    <button
+                        onClick={handleDelete}
+                        className="rounded p-1.5 bg-foreground/5 text-foreground transition-colors hover:bg-red-100 hover:text-red-700"
+                        title="Delete clip"
+                    >
+                        <Trash2 className="h-4 w-4" />
                     </button>
                 </div>
             </div>
