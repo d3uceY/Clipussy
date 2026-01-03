@@ -2,6 +2,9 @@ import { useState, useRef, useEffect } from "react"
 import { Search } from "lucide-react"
 import ClipCard from "./ui/clip-card"
 import { useClips } from "../context/ClipContext"
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { playSound } from "@/helpers/playSound";
 
 // Sample data from the provided JSON
 
@@ -9,6 +12,14 @@ function PageContent() {
     const [searchQuery, setSearchQuery] = useState("")
     const { clips } = useClips()
     const searchInputRef = useRef<HTMLInputElement>(null)
+    const tl = gsap.timeline();
+
+    useGSAP(() => {
+        tl.to('.paper-curtain-1', { left: "-53vw", duration: 1.5, ease: "steps(12)", onStart: () => playSound('paper-curtain-sound.mp3', true, .8) })
+            .to('.paper-curtain-2', { right: '-53vw', duration: 1.5, ease: "steps(9)", }, '-=1.5')
+            .from('.pussy', { y: '100%', xPercent: -100, ease: "steps(12)" }, "-=0.5")
+    })
+
 
     const filteredClips = () => {
         const query = searchQuery.toLowerCase()
@@ -46,12 +57,12 @@ function PageContent() {
 
     return (
         <main className="min-h-screen bg-background p-6 md:p-10">
-          
-                <img src="/paper-curtain.png" className="paper-curtain-1 h-screen fixed w-[53vw] left-0 top-0 bottom-0 z-10 "/>
-                <img src="/paper-curtain.png" className="paper-curtain-2 h-screen fixed w-[53vw] -right-8 top-0 bottom-0 z-10 "/> 
+
+            <img src="/paper-curtain.png" className="paper-curtain-1 h-screen fixed w-[53vw] left-0 top-0 bottom-0 z-10 " />
+            <img src="/paper-curtain.png" className="paper-curtain-2 h-screen fixed w-[53vw] -right-8 top-0 bottom-0 z-10 " />
             {/* // pussy cat image */}
-            <div className="h-[20vh] fixed bottom-0 -left-6 z-1">
-                <img src="/pussy.png" alt="pussy" className="block h-full"/>
+            <div className="h-[20vh] pussy fixed bottom-0 -left-6 z-1">
+                <img src="/pussy.png" alt="pussy" className="block h-full" />
             </div>
             <div className="margin"></div>
             <div className="mx-auto max-w-6xl">
@@ -81,7 +92,7 @@ function PageContent() {
                             <span className="italic">Pinned</span>
                         </h2>
                         <div className="free-form-grid-container">
-                            {   filteredClips().pinned.map((clip) => (
+                            {filteredClips().pinned.map((clip) => (
                                 <ClipCard key={clip.id} clip={clip} type="pinned" />
                             ))}
                         </div>

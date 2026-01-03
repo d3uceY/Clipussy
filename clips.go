@@ -9,9 +9,9 @@ type Clip struct {
 	Content   string `json:"content"`
 	Length    int    `json:"length"`
 	Pinned    bool   `json:"isPinned"`
-	CreatedAt string `json:"createdAt"`
+	CreatedAt string `json:"createdAt"` 
 }
-
+ 
 // this gets all clips
 func getClips() ([]Clip, error) {
 	// we want to limit the amount of clips to only hundred, the LIMIT was not added because i
@@ -25,7 +25,7 @@ func getClips() ([]Clip, error) {
 
 	var clips []Clip
 	for rows.Next() {
-		var id int
+		var id int 
 		var content, clipType, createdAt string
 		var pinned bool
 		err := rows.Scan(&id, &content, &clipType, &pinned, &createdAt)
