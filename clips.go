@@ -15,7 +15,7 @@ type Clip struct {
 // this gets all clips
 func getClips() ([]Clip, error) {
 	// we want to limit the amount of clips to only hundred, the LIMIT was not added because i
-	// already trim out some clips every time a new one is inserted. check addClip() 
+	// already trim out some clips every time a new one is inserted. check addClip()
 	query := `SELECT id, content, type, pinned, created_at FROM clips ORDER BY pinned DESC, created_at DESC`
 	rows, err := DB.Query(query)
 	if err != nil {
@@ -32,7 +32,7 @@ func getClips() ([]Clip, error) {
 		if err != nil {
 			return nil, fmt.Errorf("failed to scan clip: %v", err)
 		}
-		
+
 		clips = append(clips, Clip{
 			ID:        fmt.Sprintf("clip_%03d", id),
 			Content:   content,
@@ -48,7 +48,6 @@ func getClips() ([]Clip, error) {
 
 	return clips, nil
 }
-
 
 // this adds a new clip typeshit
 func addClip(content string, clipType string) error {

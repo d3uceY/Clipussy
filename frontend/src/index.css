@@ -242,7 +242,7 @@
 .torn-input::after {
   content: "";
   position: absolute;
-  top: 100%;
+  top: 90%; /* used to be hundred */
   height: 20px;
   width: 100%;
   left: 0;

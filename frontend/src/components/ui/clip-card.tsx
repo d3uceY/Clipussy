@@ -15,6 +15,7 @@ interface ClipCardProps {
 export default function ClipCard({ clip, type }: ClipCardProps) {
     const [copied, setCopied] = useState(false)
     const cardRef = useRef<HTMLDivElement>(null)
+    // const { getClips, soundOn, clips, setClips } = useClips()
     const { getClips, soundOn } = useClips()
 
     useEffect(() => {
@@ -62,12 +63,19 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
 
     const handleDelete = async () => {
         const clipId = Number(clip.id.replace('clip_', ''))
-        
+
+        playSound("/sounds/paper-rip.mp3", soundOn, .1)
+
+
+        // TODO: omo, there is a bug here where if you delete the last clip in pinned or recent, it doesnt update the UI properly
+        // If this is the last clip, so i clear that shit to avoid stale data
+        // if (clips.pinned.length <= 1 && clips.recent.length <= 1) {
+        //     setClips({ pinned: [], recent: [] })
+        // }
         await Delete(clipId).catch((err) => {
             console.error("Failed to delete clip:", err)
-        }).finally(() => {
-            getClips()
         })
+        await getClips()
     }
 
     return (
@@ -101,8 +109,8 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
                     <button
                         onClick={handlePin}
                         className={`rounded p-1.5 transition-colors ${clip.isPinned
-                                ? "bg-yellow-100 text-yellow-700 hover:bg-red-100 hover:text-red-700"
-                                : "bg-foreground/5 text-foreground hover:bg-yellow-100 hover:text-yellow-700"
+                            ? "bg-yellow-100 text-yellow-700 hover:bg-red-100 hover:text-red-700"
+                            : "bg-foreground/5 text-foreground hover:bg-yellow-100 hover:text-yellow-700"
                             }`}
                         title={clip.isPinned ? "Unpin clip" : "Pin clip"}
                     >
