@@ -13,11 +13,13 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { GetVersion } from "../../wailsjs/go/main/App";
 
 // Sample data from the provided JSON
 
 function PageContent() {
     const [searchQuery, setSearchQuery] = useState("")
+    const [version, setVersion] = useState("")
     const { clips } = useClips()
     const searchInputRef = useRef<HTMLInputElement>(null)
     const tl = gsap.timeline();
@@ -27,6 +29,10 @@ function PageContent() {
             .to('.paper-curtain-2', { right: '-53vw', duration: 1.5, ease: "steps(9)", }, '-=1.5')
             .from('.pussy', { y: '100%', xPercent: -100, ease: "steps(12)" }, "-=0.5")
     })
+
+    useEffect(() => {
+        GetVersion().then(setVersion).catch(err => console.error("Failed to get version:", err))
+    }, [])
 
 
     const filteredClips = () => {
@@ -80,7 +86,7 @@ function PageContent() {
                         <h1 className="font-serif text-4xl font-bold italic text-foreground md:text-5xl">Clipussy</h1>
                         <Dialog>
                             <DialogTrigger asChild>
-                                <button  className="heartbeat text-2xl hover:opacity-70 transition-opacity cursor-pointer font-bold" title="About">
+                                <button className="heartbeat text-2xl hover:opacity-70 transition-opacity cursor-pointer font-bold" title="About">
                                     ⓘ
                                 </button>
                             </DialogTrigger>
@@ -93,9 +99,9 @@ function PageContent() {
                                         </p>
                                         <p>
                                             Created with 💜 by <strong>Onyekwelu Jesse</strong> (
-                                            <a 
-                                                href="https://github.com/d3uceY" 
-                                                target="_blank" 
+                                            <a
+                                                href="https://github.com/d3uceY"
+                                                target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="text-blue-600 hover:underline"
                                             >
@@ -106,6 +112,11 @@ function PageContent() {
                                         <p className="text-sm text-muted-foreground pt-2">
                                             Built with Wails, React, TypeScript, and Go
                                         </p>
+                                        {version && (
+                                            <p className="text-xs text-muted-foreground pt-1">
+                                                Version: {version}
+                                            </p>
+                                        )}
                                     </DialogDescription>
                                 </DialogHeader>
                             </DialogContent>
