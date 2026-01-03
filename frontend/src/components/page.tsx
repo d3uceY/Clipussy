@@ -46,6 +46,9 @@ function PageContent() {
 
     return (
         <main className="min-h-screen bg-background p-6 md:p-10">
+            <div className="h-[20vh] fixed bottom-0 -left-6 z-1">
+                <img src="/pussy.png" alt="pussy" className="block h-full"/>
+            </div>
             <div className="margin"></div>
             <div className="mx-auto max-w-6xl">
                 {/* Header */}
