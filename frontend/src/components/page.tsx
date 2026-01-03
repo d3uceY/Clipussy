@@ -47,10 +47,8 @@ function PageContent() {
     return (
         <main className="min-h-screen bg-background p-6 md:p-10">
           
-                {/* <div className="paper-curtain-1 h-screen fixed w-[53vw] left-0 top-0 bottom-0 bg-[white] z-10"/>
-                <div className="paper-curtain-2 h-screen fixed w-[53vw] right-0 top-0 bottom-0 bg-[white]"/> */}
-           
-
+                <img src="/paper-curtain.png" className="paper-curtain-1 h-screen fixed w-[53vw] left-0 top-0 bottom-0 z-10 "/>
+                <img src="/paper-curtain.png" className="paper-curtain-2 h-screen fixed w-[53vw] -right-8 top-0 bottom-0 z-10 "/> 
             {/* // pussy cat image */}
             <div className="h-[20vh] fixed bottom-0 -left-6 z-1">
                 <img src="/pussy.png" alt="pussy" className="block h-full"/>
