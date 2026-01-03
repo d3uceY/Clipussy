@@ -94,3 +94,23 @@ func togglePinClip(clipID int) error {
 
 	return nil
 }
+
+// this deletes a clip by its ID
+func deleteClip(clipID int) error {
+	query := `DELETE FROM clips WHERE id = ?`
+	result, err := DB.Exec(query, clipID)
+	if err != nil {
+		return fmt.Errorf("failed to delete clip: %v", err)
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("failed to get rows affected: %v", err)
+	}
+
+	if rowsAffected == 0 {
+		return fmt.Errorf("clip with id %d not found", clipID)
+	}
+
+	return nil
+}
