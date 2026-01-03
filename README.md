@@ -1,4 +1,9 @@
-# 📋 Clipussy
+<p align="center">
+  <img src="./build/appicon.png" alt="icon" width="90">
+</p>
+<div align="center">
+<h1>Clipussy</h1>
+</div>
 
 A creative and stylish clipboard manager built with Wails that helps you keep track of your copied content with a unique paper-aesthetic interface.
 
