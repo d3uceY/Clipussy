@@ -47,7 +47,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #ffffff00;
+  --background: #F9F5E600;
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -242,10 +242,11 @@
 .torn-input::after {
   content: "";
   position: absolute;
-  top: 90%; /* used to be hundred */
+  top: 80%;
   height: 20px;
   width: 100%;
   left: 0;
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/23618/rip.svg) bottom;
+  background: url(/torn.svg) bottom;
   background-size: 45%;
 }
+
