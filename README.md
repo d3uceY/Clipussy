@@ -5,7 +5,7 @@
 <h1>Clipussy</h1>
 </div>
 
-A creative and stylish clipboard manager built with Wails that helps you keep track of your copied content with a unique paper-aesthetic interface.
+A creative and stylish clipboard manager built with Wails that helps you keep track of your copied content with a unique paper-aesthetic interface. PLEASE READ: (Clipboard + pussycat(logo) = Clipussy) i am beating the allegations
 
 ![Clipussy Banner](https://img.shields.io/badge/Made%20with-Wails-00ADD8?style=for-the-badge&logo=go)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
