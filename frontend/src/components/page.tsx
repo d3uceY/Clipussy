@@ -67,7 +67,7 @@ function PageContent() {
             <div className="margin"></div>
             <div className="mx-auto max-w-6xl">
                 {/* Header */}
-                <div className="mb-10 flex items-center justify-between">
+                <div className="mb-10 flex items-center gap-8 justify-between">
                     <h1 className="font-serif text-4xl font-bold italic text-foreground md:text-5xl">Clipussy</h1>
                     <div className="relative w-full max-w-md torn-input">
                         <div className="tape-1 absolute -top-3 left-0 h-12 w-4 bg-yellow-200/40 rotate-45 rounded-sm shadow-sm"></div>
