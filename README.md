@@ -12,7 +12,7 @@ A creative and stylish clipboard manager built with Wails that helps you keep tr
 
 ## 📥 Download
 
-**[⬇️ Download the latest installer (v0.1.1)]([https://github.com/d3uceY/Clipussy/releases/tag/v0.1.0](https://github.com/d3uceY/Clipussy/releases/tag/v0.1.1))**
+**[⬇️ Download the latest installer (v0.1.1)](https://github.com/d3uceY/Clipussy/releases/tag/v0.1.0](https://github.com/d3uceY/Clipussy/releases/tag/v0.1.1))**
 
 Get the Windows installer from the latest release and start managing your clipboard with style!
 ![Clipussy 2026-01-03 16-19-58](https://github.com/user-attachments/assets/7ec426d6-8e62-4b05-ad9c-797c28c48e94)
