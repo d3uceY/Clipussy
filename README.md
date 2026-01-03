@@ -10,6 +10,12 @@ A creative and stylish clipboard manager built with Wails that helps you keep tr
 ![Clipussy Banner](https://img.shields.io/badge/Made%20with-Wails-00ADD8?style=for-the-badge&logo=go)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
 
+## 📥 Download
+
+**[⬇️ Download the latest installer (v0.1.0)](https://github.com/d3uceY/Clipussy/releases/tag/v0.1.0)**
+
+Get the Windows installer from the latest release and start managing your clipboard with style!
+
 ## ✨ Features
 
 - 🔄 **Automatic Clipboard Monitoring** - Automatically captures everything you copy
