@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react"
 import type { Clip } from '../../../types/clip'
 import { TogglePin } from "../../../wailsjs/go/main/App"
 import { useClips } from "@/context/ClipContext"
+import { playSound } from "@/helpers/playSound"
 
 
 interface ClipCardProps {
@@ -15,7 +16,7 @@ interface ClipCardProps {
 export default function ClipCard({ clip, type }: ClipCardProps) {
     const [copied, setCopied] = useState(false)
     const cardRef = useRef<HTMLDivElement>(null)
-    const { getClips } = useClips()
+    const { getClips, soundOn } = useClips()
 
     useEffect(() => {
         const updateRowSpan = () => {
@@ -36,6 +37,7 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
     const handleCopy = async () => {
         try {
             await navigator.clipboard.writeText(clip.content)
+            playSound("/sounds/paper-copy.wav", soundOn, .3)
             setCopied(true)
             setTimeout(() => setCopied(false), 2000)
         } catch (err) {
@@ -45,7 +47,13 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
 
     const handlePin = async () => {
         const clipId = Number(clip.id.replace('clip_', ''))
-        console.log("Toggling pin for clip ID:", clipId)
+
+        // i want a different sound for pinning vs unpinning
+        // when pinning, a louder sound 
+        // when unpinning, a softer sound
+        const clipSoundLevel = !clip.isPinned ? .1 : .3;
+        playSound("/sounds/clipboard-slap.mp3", soundOn, clipSoundLevel)
+        
         await TogglePin(clipId).catch((err) => {
             console.error("Failed to toggle pin:", err)
         }).finally(() => {
@@ -100,11 +108,10 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
                     </button>
                     <button
                         onClick={handlePin}
-                        className={`rounded p-1.5 transition-colors ${
-                            clip.isPinned 
-                                ? "bg-yellow-100 text-yellow-700 hover:bg-red-100 hover:text-red-700" 
+                        className={`rounded p-1.5 transition-colors ${clip.isPinned
+                                ? "bg-yellow-100 text-yellow-700 hover:bg-red-100 hover:text-red-700"
                                 : "bg-foreground/5 text-foreground hover:bg-yellow-100 hover:text-yellow-700"
-                        }`}
+                            }`}
                         title={clip.isPinned ? "Unpin clip" : "Pin clip"}
                     >
                         <Pin className={`h-4 w-4 ${clip.isPinned ? "fill-current" : ""}`} />
