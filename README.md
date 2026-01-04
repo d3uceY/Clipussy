@@ -280,7 +280,6 @@ This project is licensed under the MIT License.
 ## 🙏 Acknowledgments
 
 - [Wails](https://wails.io/) for the amazing Go + Web framework
-- [shadcn/ui](https://ui.shadcn.com/) for the beautiful component library
 - All open-source contributors whose libraries made this possible
 
 ---
