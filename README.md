@@ -23,9 +23,12 @@ Get the Windows installer from the latest release and start managing your clipbo
 - 🔄 **Automatic Clipboard Monitoring** - Automatically captures everything you copy
 - 📌 **Pin Important Clips** - Keep your most-used clips at the top
 - 🔍 **Fast Search** - Quickly find clips with Ctrl+F
+- <img width="530" height="112" alt="showcase-search" src="https://github.com/user-attachments/assets/c2c76d50-5f94-481d-9191-ad37f2518967" />
 - 🎨 **Unique Paper Aesthetic** - Beautiful hand-drawn, notebook-style UI
+- <img width="1894" height="994" alt="showcase-1" src="https://github.com/user-attachments/assets/ad3eb87b-12bc-4fc4-9636-05ce75044db4" />
 - 🗑️ **Easy Management** - Copy, pin, and delete clips with intuitive controls
-- 🔊 **Sound Effects** - Audible feedback for actions (toggleable)
+- <img width="705" height="324" alt="showcase-action-btns" src="https://github.com/user-attachments/assets/d03a6634-8b41-4d78-a976-662b4c2b8f89" />
+- 🔊 **Sound Effects** - Audible feedback for actions
 - 💾 **Persistent Storage** - SQLite database keeps your clips safe
 - 🎯 **Smart Cleanup** - Automatically maintains the 100 most recent clips
 
