@@ -87,7 +87,10 @@ function PageContent() {
                                     ⓘ
                                 </button>
                             </DialogTrigger>
-                            <DialogContent className="bg-[#F9F5E6]">
+                            <DialogContent className="bg-[transparent] shadow-none border-0 pt-9">
+                                <div className="absolute h-[calc(100%+2rem)] w-full -z-1">
+                                    <img src="/dialog-bg.png" alt="" className=" h-full w-full"/>
+                                </div>
                                 <DialogHeader>
                                     <DialogTitle className="text-2xl font-serif italic">About Clipussy</DialogTitle>
                                     <DialogDescription className="text-base pt-4 space-y-3">

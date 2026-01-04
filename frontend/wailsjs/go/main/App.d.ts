@@ -8,6 +8,4 @@ export function GetClips():Promise<Array<main.Clip>>;
 
 export function GetVersion():Promise<string>;
 
-export function Greet(arg1:string):Promise<string>;
-
 export function TogglePin(arg1:number):Promise<void>;
