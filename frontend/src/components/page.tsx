@@ -23,7 +23,7 @@ function PageContent() {
     const tl = gsap.timeline();
 
     useGSAP(() => {
-        tl.to('.paper-curtain-1', { left: "-53vw", duration: 1.5, ease: "steps(12)", onStart: () => playSound('paper-curtain-sound.mp3', true, .8) })
+        tl.to('.paper-curtain-1', { left: "-53vw", duration: 1.5, ease: "steps(12)", onStart: () => playSound('paper-curtain-sound.mp3', true, 1) })
             .to('.paper-curtain-2', { right: '-53vw', duration: 1.5, ease: "steps(9)", }, '-=1.5')
             .from('.pussy', { y: '100%', xPercent: -100, ease: "steps(12)" }, "-=0.5")
     })
@@ -87,7 +87,7 @@ function PageContent() {
                                     ⓘ
                                 </button>
                             </DialogTrigger>
-                            <DialogContent className="bg-[transparent] shadow-none border-0 pt-9">
+                            <DialogContent className="!bg-[transparent] shadow-none border-0 pt-9">
                                 <div className="absolute h-[calc(100%+2rem)] w-full -z-1">
                                     <img src="/dialog-bg.png" alt="" className=" h-full w-full"/>
                                 </div>

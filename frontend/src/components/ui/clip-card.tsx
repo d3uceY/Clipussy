@@ -51,7 +51,7 @@ export default function ClipCard({ clip, type }: ClipCardProps) {
         // i want a different sound for pinning vs unpinning
         // when pinning, a louder sound 
         // when unpinning, a softer sound
-        const clipSoundLevel = clip.isPinned ? .3 : .5;
+        const clipSoundLevel = clip.isPinned ? .4 : 1;
         playSound("/sounds/clipboard-slap.mp3", soundOn, clipSoundLevel)
 
         await TogglePin(clipId).catch((err) => {
