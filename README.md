@@ -47,6 +47,12 @@ Get the Windows installer from the latest release and start managing your clipbo
 - **[GSAP](https://greensock.com/gsap/)** - Animation library
 - **[Lucide React](https://lucide.dev/)** - Icon library
 
+## Why Wails?
+
+Clipussy uses Wails to:
+- Integrate native Windows clipboard APIs via Go
+- Communicate clipboard events to a React UI in real time
+- Bundle a lightweight, native-feeling desktop app without Electron
 ## 🏗️ Architecture
 
 Clipussy follows a clean architecture pattern with clear separation between frontend and backend:
