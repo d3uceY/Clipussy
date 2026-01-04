@@ -15,8 +15,6 @@ import {
 } from "@/components/ui/dialog";
 import { GetVersion } from "../../wailsjs/go/main/App";
 
-// Sample data from the provided JSON
-
 function PageContent() {
     const [searchQuery, setSearchQuery] = useState("")
     const [version, setVersion] = useState("")
@@ -71,7 +69,6 @@ function PageContent() {
 
     return (
         <main className="min-h-screen bg-background p-6 md:p-10">
-           {/* {JSON.stringify(clips.recent[0])} */}
             <img src="/paper-curtain.png" className="paper-curtain-1 h-screen fixed w-[53vw] left-0 top-0 bottom-0 z-10 " />
             <img src="/paper-curtain.png" className="paper-curtain-2 h-screen fixed w-[53vw] -right-8 top-0 bottom-0 z-10 " />
             {/* // pussy cat image */}
